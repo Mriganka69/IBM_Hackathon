@@ -1,0 +1,276 @@
+2025-08-07 00:14:56,575 - __main__ - INFO - ======================================================================
+2025-08-07 00:15:00,751 - elasticsearch - WARNING - GET http://localhost:9200/ [status:N/A request:4.165s]
+Traceback (most recent call last):
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 95, in create_connection
+    raise err
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\elasticsearch\connection\http_urllib3.py", line 255, in perform_request
+    response = self.pool.urlopen(
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 798, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\retry.py", line 525, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\packages\six.py", line 770, in reraise
+    raise value
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 714, in urlopen
+    httplib_response = self._make_request(
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 415, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1286, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1332, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1281, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1041, in _send_output
+    self.send(msg)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 979, in send
+    self.connect()
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 205, in connect
+    conn = self._new_conn()
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x0000024306E1D290>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+2025-08-07 00:15:01,110 - app.utils.camera_monitor - INFO - Camera monitor initialized
+2025-08-07 00:15:01,112 - app.utils.multi_camera_manager - INFO - MultiCameraManager initialized with 2 cameras
+2025-08-07 00:15:01,686 - app.utils.multi_camera_manager - ERROR - Error initializing camera camera_1: Could not open camera camera_1 with URL: 0
+2025-08-07 00:15:01,686 - app.utils.multi_camera_manager - ERROR - Error initializing cameras: Could not open camera camera_1 with URL: 0
+2025-08-07 00:15:01,720 - app.utils.multi_camera_manager - INFO - Stopping all cameras...
+2025-08-07 00:15:01,720 - app.utils.multi_camera_manager - ERROR - Error stopping cameras: 'bool' object is not callable
+2025-08-07 00:38:26,888 - __main__ - INFO - ======================================================================
+2025-08-07 00:38:31,036 - elasticsearch - WARNING - GET http://localhost:9200/ [status:N/A request:4.140s]
+Traceback (most recent call last):
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 95, in create_connection
+    raise err
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\elasticsearch\connection\http_urllib3.py", line 255, in perform_request
+    response = self.pool.urlopen(
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 798, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\retry.py", line 525, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\packages\six.py", line 770, in reraise
+    raise value
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 714, in urlopen
+    httplib_response = self._make_request(
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 415, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1286, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1332, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1281, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1041, in _send_output
+    self.send(msg)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 979, in send
+    self.connect()
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 205, in connect
+    conn = self._new_conn()
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x000001BE0ABBCD10>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+2025-08-07 00:38:31,102 - app.utils.camera_monitor - INFO - Camera monitor initialized
+2025-08-07 00:38:31,102 - app.utils.multi_camera_manager - INFO - MultiCameraManager initialized with 2 cameras
+2025-08-07 00:38:31,411 - app.utils.multi_camera_manager - ERROR - Error initializing camera camera_1: Could not open camera camera_1 with URL: 0
+2025-08-07 00:38:31,411 - app.utils.multi_camera_manager - ERROR - Error initializing cameras: Could not open camera camera_1 with URL: 0
+2025-08-07 00:38:31,439 - app.utils.multi_camera_manager - INFO - Stopping all cameras...
+2025-08-07 00:38:31,439 - app.utils.multi_camera_manager - ERROR - Error stopping cameras: 'bool' object is not callable
+2025-08-07 00:40:39,864 - __main__ - INFO - ======================================================================
+2025-08-07 00:40:43,967 - elasticsearch - WARNING - GET http://localhost:9200/ [status:N/A request:4.101s]
+Traceback (most recent call last):
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 95, in create_connection
+    raise err
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\elasticsearch\connection\http_urllib3.py", line 255, in perform_request
+    response = self.pool.urlopen(
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 798, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\retry.py", line 525, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\packages\six.py", line 770, in reraise
+    raise value
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 714, in urlopen
+    httplib_response = self._make_request(
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 415, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1286, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1332, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1281, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1041, in _send_output
+    self.send(msg)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 979, in send
+    self.connect()
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 205, in connect
+    conn = self._new_conn()
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x000001BC5E9AC710>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+2025-08-07 00:40:44,028 - app.utils.camera_monitor - INFO - Camera monitor initialized
+2025-08-07 00:40:44,031 - app.utils.multi_camera_manager - INFO - MultiCameraManager initialized with 2 cameras
+2025-08-07 00:40:44,153 - app.utils.multi_camera_manager - ERROR - Error initializing camera camera_1: Could not open camera camera_1 with URL: 0
+2025-08-07 00:40:44,153 - app.utils.multi_camera_manager - ERROR - Error initializing cameras: Could not open camera camera_1 with URL: 0
+2025-08-07 00:40:44,170 - app.utils.multi_camera_manager - INFO - Stopping all cameras...
+2025-08-07 00:40:44,170 - app.utils.multi_camera_manager - ERROR - Error stopping cameras: 'bool' object is not callable
+2025-08-07 00:42:06,186 - __main__ - INFO - ======================================================================
+2025-08-07 00:42:10,283 - elasticsearch - WARNING - GET http://localhost:9200/ [status:N/A request:4.091s]
+Traceback (most recent call last):
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 95, in create_connection
+    raise err
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\elasticsearch\connection\http_urllib3.py", line 255, in perform_request
+    response = self.pool.urlopen(
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 798, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\retry.py", line 525, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\packages\six.py", line 770, in reraise
+    raise value
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 714, in urlopen
+    httplib_response = self._make_request(
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 415, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1286, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1332, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1281, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1041, in _send_output
+    self.send(msg)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 979, in send
+    self.connect()
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 205, in connect
+    conn = self._new_conn()
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x000001BC0AE1C8D0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+2025-08-07 00:42:10,296 - __main__ - WARNING - No database connection, skipping employee registration
+2025-08-07 00:42:10,299 - app.utils.camera_monitor - INFO - Camera monitor initialized
+2025-08-07 00:42:10,299 - app.utils.multi_camera_manager - INFO - MultiCameraManager initialized with 2 cameras
+2025-08-07 00:42:10,386 - app.utils.multi_camera_manager - ERROR - Error initializing camera camera_1: Could not open camera camera_1 with URL: 0
+2025-08-07 00:42:10,386 - app.utils.multi_camera_manager - ERROR - Error initializing cameras: Could not open camera camera_1 with URL: 0
+2025-08-07 00:42:10,404 - app.utils.multi_camera_manager - INFO - Stopping all cameras...
+2025-08-07 00:42:10,404 - app.utils.multi_camera_manager - ERROR - Error stopping cameras: 'bool' object is not callable
+2025-08-07 00:43:29,413 - __main__ - INFO - ======================================================================
+2025-08-07 00:43:33,470 - elasticsearch - WARNING - GET http://localhost:9200/ [status:N/A request:4.050s]
+Traceback (most recent call last):
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 95, in create_connection
+    raise err
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\elasticsearch\connection\http_urllib3.py", line 255, in perform_request
+    response = self.pool.urlopen(
+               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 798, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\retry.py", line 525, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\packages\six.py", line 770, in reraise
+    raise value
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 714, in urlopen
+    httplib_response = self._make_request(
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 415, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1286, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1332, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1281, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1041, in _send_output
+    self.send(msg)
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 979, in send
+    self.connect()
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 205, in connect
+    conn = self._new_conn()
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\mriga\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x000001A81E38CCD0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+2025-08-07 00:43:33,485 - app.utils.camera_monitor - INFO - Camera monitor initialized
+2025-08-07 00:43:33,485 - app.utils.multi_camera_manager - INFO - MultiCameraManager initialized with 2 cameras
+2025-08-07 00:43:33,565 - app.utils.multi_camera_manager - ERROR - Error initializing camera camera_1: Could not open camera camera_1 with URL: 0
+2025-08-07 00:43:33,565 - app.utils.multi_camera_manager - ERROR - Error initializing cameras: Could not open camera camera_1 with URL: 0
+2025-08-07 00:43:33,584 - app.utils.multi_camera_manager - INFO - Stopping all cameras...
+2025-08-07 00:43:33,590 - app.utils.multi_camera_manager - ERROR - Error stopping cameras: 'bool' object is not callable

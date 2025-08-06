@@ -1,0 +1,39 @@
+# Core dependencies
+flask==2.3.3
+flask-cors==4.0.0
+ultralytics==8.0.196
+opencv-python==4.8.1.78
+numpy==1.24.3
+
+# DeepSort tracking
+deep-sort-realtime==1.3.2
+
+# Face detection and embedding
+insightface==0.7.3
+onnxruntime==1.16.1
+
+# Database
+elasticsearch==8.10.0
+elasticsearch-dsl==8.18.0
+
+
+# Security and encryption
+cryptography==41.0.4
+bcrypt==4.0.1
+
+# Utilities
+python-dotenv==1.0.0
+requests==2.31.0
+pillow==10.0.1
+scikit-learn==1.3.0
+
+# Camera and video processing
+ffmpeg-python==0.2.0
+
+# Logging and monitoring
+psutil==5.9.5
+schedule==1.2.0
+
+# Development
+pytest==7.4.2
+black==23.7.0 
