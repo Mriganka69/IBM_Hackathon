@@ -34,7 +34,13 @@ const CameraHealth = () => {
     try {
       setLoading(true);
       const camerasData = await getCameras();
-      setCameras(camerasData);
+      // Ensure cameras is always an array
+      const cameraList = Array.isArray(camerasData?.cameras)
+        ? camerasData.cameras
+        : Array.isArray(camerasData)
+          ? camerasData
+          : [];
+      setCameras(cameraList);
       setError(null);
     } catch (err) {
       console.error('Error fetching cameras:', err);

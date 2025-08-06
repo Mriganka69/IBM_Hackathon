@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { 
-  Users, 
-  Shield, 
-  AlertTriangle, 
+import {
+  Users,
+  Shield,
+  AlertTriangle,
   Activity,
   TrendingUp,
-  Clock,
   Wifi,
   WifiOff
 } from 'lucide-react';
@@ -27,15 +26,23 @@ const Dashboard = () => {
           getSystemStats(),
           getCameras()
         ]);
-        
+
         setSystemStats(statsData);
-        setCameras(camerasData);
+
+        // Ensure cameras is always an array
+        const cameraList = Array.isArray(camerasData?.cameras)
+          ? camerasData.cameras
+          : Array.isArray(camerasData)
+            ? camerasData
+            : [];
+
+        setCameras(cameraList);
         setError(null);
       } catch (err) {
         console.error('Error fetching dashboard data:', err);
         setError('Failed to load dashboard data');
-        
-        // Set mock data for demo
+
+        // Set fallback mock data
         setSystemStats({
           total_people_detected: 42,
           total_access_granted: 156,
@@ -46,7 +53,7 @@ const Dashboard = () => {
           system_uptime: '2 days, 14 hours',
           last_update: new Date().toISOString()
         });
-        
+
         setCameras([
           {
             id: 'camera_1',
@@ -87,7 +94,7 @@ const Dashboard = () => {
     };
 
     fetchData();
-    
+
     // Refresh data every 30 seconds
     const interval = setInterval(fetchData, 30000);
     return () => clearInterval(interval);
@@ -203,9 +210,9 @@ const Dashboard = () => {
               </span>
             </div>
           </div>
-          
+
           <div className="space-y-3">
-            {cameras.map((camera) => (
+            {Array.isArray(cameras) && cameras.map((camera) => (
               <div key={camera.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
                 <div className="flex items-center space-x-3">
                   {camera.status === 'online' ? (
@@ -224,7 +231,7 @@ const Dashboard = () => {
                 </div>
                 <div className="text-right">
                   <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                    camera.status === 'online' 
+                    camera.status === 'online'
                       ? 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-400'
                       : 'text-red-600 bg-red-100 dark:bg-red-900 dark:text-red-400'
                   }`}>
@@ -248,7 +255,7 @@ const Dashboard = () => {
             </h2>
             <TrendingUp className="h-5 w-5 text-green-600" />
           </div>
-          
+
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-gray-600 dark:text-gray-400">System Uptime</span>
@@ -256,21 +263,21 @@ const Dashboard = () => {
                 {systemStats?.system_uptime || 'Unknown'}
               </span>
             </div>
-            
+
             <div className="flex items-center justify-between">
               <span className="text-gray-600 dark:text-gray-400">Active Cameras</span>
               <span className="font-medium text-gray-900 dark:text-white">
                 {systemStats?.active_cameras || 0} / {systemStats?.total_cameras || 0}
               </span>
             </div>
-            
+
             <div className="flex items-center justify-between">
               <span className="text-gray-600 dark:text-gray-400">Total Access Events</span>
               <span className="font-medium text-gray-900 dark:text-white">
                 {(systemStats?.total_access_granted || 0) + (systemStats?.total_access_denied || 0)}
               </span>
             </div>
-            
+
             <div className="flex items-center justify-between">
               <span className="text-gray-600 dark:text-gray-400">Success Rate</span>
               <span className="font-medium text-green-600">
@@ -290,12 +297,11 @@ const Dashboard = () => {
           Live Camera Feeds
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {cameras.map((camera) => (
+          {Array.isArray(cameras) && cameras.map((camera) => (
             <CameraCard
               key={camera.id}
               camera={camera}
-              onClick={(camera) => {
-                // Navigate to live feed page
+              onClick={() => {
                 window.location.href = `/live-feed?camera=${camera.id}`;
               }}
             />
@@ -306,4 +312,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard; 
+export default Dashboard;

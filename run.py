@@ -187,16 +187,13 @@ def start_flask_server(host='0.0.0.0', port=5000):
     return flask_thread
 
 def main():
-    """Main function to run the Intelligent Access System"""
-    global camera_manager
-    
-    # Setup argument parser
-    parser = argparse.ArgumentParser(description='Intelligent Office Access Management System')
-    parser.add_argument('--host', default='0.0.0.0', help='Flask server host')
-    parser.add_argument('--port', type=int, default=5000, help='Flask server port')
-    parser.add_argument('--cameras', type=int, default=2, help='Number of cameras to use')
-    parser.add_argument('--no-flask', action='store_true', help='Run without Flask server')
-    parser.add_argument('--demo-mode', action='store_true', help='Run in demo mode with sample data')
+    """Main entry point for the Intelligent Office Access Management System"""
+    parser = argparse.ArgumentParser(description="Intelligent Office Access Management System")
+    parser.add_argument("--host", default="0.0.0.0", help="Host to bind Flask server to")
+    parser.add_argument("--port", type=int, default=5000, help="Port to bind Flask server to")
+    parser.add_argument("--cameras", type=int, default=2, help="Number of cameras to use")
+    parser.add_argument("--no-flask", action="store_true", help="Disable Flask server")
+    parser.add_argument("--demo-mode", action="store_true", help="Enable demo mode with sample data")
     
     args = parser.parse_args()
     
@@ -210,6 +207,9 @@ def main():
     logger.info("🚀 Starting Intelligent Office Access Management System (P-002)")
     logger.info("=" * 70)
     
+    camera_manager = None
+    flask_thread = None
+    
     try:
         # Check if YOLO model exists
         model_path = "yolov8s.pt"
@@ -220,10 +220,15 @@ def main():
         
         # Initialize database
         logger.info("📊 Initializing database...")
-        es_client = initialize_database()
+        try:
+            es_client = initialize_database()
+        except Exception as e:
+            logger.warning(f"⚠️ Database initialization failed: {e}")
+            logger.info("Continuing without database functionality...")
+            es_client = None
         
         # Register sample employees if in demo mode
-        if args.demo_mode:
+        if args.demo_mode and es_client:
             logger.info("👥 Registering sample employees...")
             register_sample_employees(es_client)
         
@@ -242,19 +247,28 @@ def main():
         # Add frame callback
         camera_manager.add_frame_callback(frame_callback)
         
-        # Initialize cameras
+        # Initialize cameras (but don't fail if cameras are not available)
         logger.info("🔧 Initializing cameras...")
-        camera_manager.initialize_cameras()
+        try:
+            camera_manager.initialize_cameras()
+            cameras_available = True
+        except Exception as e:
+            logger.warning(f"⚠️ Camera initialization failed: {e}")
+            logger.info("Continuing without camera functionality...")
+            cameras_available = False
         
         # Start Flask server if not disabled
-        flask_thread = None
         if not args.no_flask:
             logger.info("🌐 Starting Flask server...")
             flask_thread = start_flask_server(args.host, args.port)
         
-        # Start camera processing
-        logger.info("▶️  Starting camera processing...")
-        camera_manager.start_all_cameras()
+        # Start camera processing only if cameras are available
+        if cameras_available:
+            logger.info("▶️  Starting camera processing...")
+            try:
+                camera_manager.start_all_cameras()
+            except Exception as e:
+                logger.warning(f"⚠️ Camera processing failed: {e}")
         
         logger.info("✅ System started successfully!")
         logger.info("=" * 70)
@@ -285,12 +299,17 @@ def main():
         # Main loop - wait for shutdown signal
         while not shutdown_event.is_set():
             try:
-                # Get system statistics every 30 seconds
-                if camera_manager:
-                    stats = camera_manager.get_system_statistics()
-                    logger.info(f"📊 System Stats - Cameras: {stats['active_cameras']}, "
-                              f"FPS: {stats['average_fps']:.1f}, "
-                              f"Frames: {stats['total_frames_processed']}")
+                # Get system statistics every 30 seconds (only if cameras are available)
+                if camera_manager and cameras_available:
+                    try:
+                        stats = camera_manager.get_system_statistics()
+                        logger.info(f"📊 System Stats - Cameras: {stats['active_cameras']}, "
+                                  f"FPS: {stats['average_fps']:.1f}, "
+                                  f"Frames: {stats['total_frames_processed']}")
+                    except Exception as e:
+                        logger.warning(f"⚠️ Error getting system stats: {e}")
+                else:
+                    logger.info("📊 System running in API-only mode")
                 
                 time.sleep(30)
                 
@@ -312,7 +331,10 @@ def main():
             # Stop camera manager
             if camera_manager:
                 logger.info("🛑 Stopping camera manager...")
-                camera_manager.stop_all_cameras()
+                try:
+                    camera_manager.stop_all_cameras()
+                except Exception as e:
+                    logger.warning(f"⚠️ Error stopping camera manager: {e}")
             
             # Stop Flask server
             if flask_app:

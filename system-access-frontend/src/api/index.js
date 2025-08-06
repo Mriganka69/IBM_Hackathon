@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { formatCameraName, getCameraLocation } from '../utils';
 
 const API_BASE_URL = 'http://localhost:5000/api';
 
@@ -39,7 +40,27 @@ export const checkHealth = () => api.get('/health');
 export const getSystemStats = () => api.get('/system/stats');
 
 // Camera endpoints
-export const getCameras = () => api.get('/cameras');
+export const getCameras = async () => {
+  const response = await api.get('/cameras');
+  // Convert cameras object to array and normalize field names
+  if (response.cameras && typeof response.cameras === 'object') {
+    const camerasArray = Object.values(response.cameras).map(camera => ({
+      ...camera,
+      personCount: camera.person_count || camera.personCount || 0,
+      lastFrame: camera.last_frame_time || camera.lastFrame,
+      // Ensure all required fields exist
+      status: camera.status || 'unknown',
+      fps: camera.fps || 0,
+      name: camera.name || formatCameraName(camera.id),
+      location: camera.location || getCameraLocation(camera.id)
+    }));
+    return {
+      ...response,
+      cameras: camerasArray
+    };
+  }
+  return response;
+};
 export const getCameraStatus = (cameraId) => api.get(`/cameras/${cameraId}`);
 export const getCameraHealth = (cameraId) => api.get(`/cameras/${cameraId}/health`);
 

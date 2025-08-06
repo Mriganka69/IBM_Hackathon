@@ -32,8 +32,14 @@ const LiveFeed = () => {
     const fetchCameras = async () => {
       try {
         const camerasData = await getCameras();
-        setCameras(camerasData);
-        const camera = camerasData.find(c => c.id === cameraId) || camerasData[0];
+        // Ensure cameras is always an array
+        const cameraList = Array.isArray(camerasData?.cameras)
+          ? camerasData.cameras
+          : Array.isArray(camerasData)
+            ? camerasData
+            : [];
+        setCameras(cameraList);
+        const camera = cameraList.find(c => c.id === cameraId) || cameraList[0];
         setSelectedCamera(camera);
         setError(null);
       } catch (err) {
@@ -233,32 +239,56 @@ const LiveFeed = () => {
               </div>
             </div>
 
-            <div className="relative bg-black rounded-lg overflow-hidden">
-              {selectedCamera?.status === 'online' ? (
-                <>
-                  <video
-                    ref={videoRef}
-                    className="w-full h-96 object-cover"
-                    autoPlay
-                    muted
-                    loop
-                    src={getVideoStreamUrl(selectedCamera.id)}
-                    onError={() => setError('Failed to load video stream')}
-                  />
-                  <canvas
-                    ref={canvasRef}
-                    className="absolute top-0 left-0 w-full h-full pointer-events-none"
-                  />
-                  
-                  {/* Mock bounding boxes */}
-                  <div className="absolute top-4 left-4 bg-green-500 text-white px-2 py-1 rounded text-sm">
-                    Person ID: 123
-                  </div>
-                  <div className="absolute top-4 right-4 bg-yellow-500 text-white px-2 py-1 rounded text-sm">
-                    Person ID: 124
-                  </div>
-                </>
-              ) : (
+                         <div className="relative bg-black rounded-lg overflow-hidden">
+               {selectedCamera?.status === 'online' ? (
+                 <>
+                   {/* Mock video feed with animated background */}
+                   <div className="w-full h-96 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden">
+                     {/* Animated background pattern */}
+                     <div className="absolute inset-0 opacity-20">
+                       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-500 to-purple-500 animate-pulse"></div>
+                     </div>
+                     
+                     {/* Mock video content */}
+                     <div className="absolute inset-0 flex items-center justify-center">
+                       <div className="text-center text-white">
+                         <div className="text-6xl mb-4">📹</div>
+                         <h3 className="text-xl font-semibold mb-2">Live Feed Simulation</h3>
+                         <p className="text-gray-300 mb-4">Camera: {selectedCamera.name}</p>
+                         <div className="grid grid-cols-2 gap-4 text-sm">
+                           <div>
+                             <p className="text-gray-400">People Detected</p>
+                             <p className="text-2xl font-bold text-green-400">{selectedCamera.personCount || 0}</p>
+                           </div>
+                           <div>
+                             <p className="text-gray-400">FPS</p>
+                             <p className="text-2xl font-bold text-blue-400">{selectedCamera.fps || 0}</p>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                     
+                     {/* Mock bounding boxes */}
+                     <div className="absolute top-4 left-4 bg-green-500 text-white px-2 py-1 rounded text-sm">
+                       Person ID: 123
+                     </div>
+                     <div className="absolute top-4 right-4 bg-yellow-500 text-white px-2 py-1 rounded text-sm">
+                       Person ID: 124
+                     </div>
+                     
+                     {/* Live indicator */}
+                     <div className="absolute bottom-4 right-4 flex items-center space-x-2">
+                       <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                       <span className="text-white text-sm">LIVE</span>
+                     </div>
+                   </div>
+                   
+                   <canvas
+                     ref={canvasRef}
+                     className="absolute top-0 left-0 w-full h-full pointer-events-none"
+                   />
+                 </>
+               ) : (
                 <div className="w-full h-96 flex items-center justify-center bg-gray-900">
                   <div className="text-center">
                     <VideoOff className="h-16 w-16 text-gray-600 mx-auto mb-4" />
@@ -271,21 +301,29 @@ const LiveFeed = () => {
               )}
             </div>
 
-            {/* Video Stats */}
-            <div className="mt-4 grid grid-cols-3 gap-4">
-              <div className="text-center">
-                <p className="text-sm text-gray-600 dark:text-gray-400">People Detected</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">2</p>
-              </div>
-              <div className="text-center">
-                <p className="text-sm text-gray-600 dark:text-gray-400">FPS</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">30</p>
-              </div>
-              <div className="text-center">
-                <p className="text-sm text-gray-600 dark:text-gray-400">Status</p>
-                <p className="text-2xl font-bold text-green-600">Active</p>
-              </div>
-            </div>
+                         {/* Video Stats */}
+             <div className="mt-4 grid grid-cols-3 gap-4">
+               <div className="text-center">
+                 <p className="text-sm text-gray-600 dark:text-gray-400">People Detected</p>
+                 <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                   {selectedCamera?.personCount || 0}
+                 </p>
+               </div>
+               <div className="text-center">
+                 <p className="text-sm text-gray-600 dark:text-gray-400">FPS</p>
+                 <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                   {selectedCamera?.fps || 0}
+                 </p>
+               </div>
+               <div className="text-center">
+                 <p className="text-sm text-gray-600 dark:text-gray-400">Status</p>
+                 <p className={`text-2xl font-bold ${
+                   selectedCamera?.status === 'online' ? 'text-green-600' : 'text-red-600'
+                 }`}>
+                   {selectedCamera?.status === 'online' ? 'Active' : 'Offline'}
+                 </p>
+               </div>
+             </div>
           </div>
         </div>
 
