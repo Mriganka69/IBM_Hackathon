@@ -65,13 +65,50 @@ export const getCameraStatus = (cameraId) => api.get(`/cameras/${cameraId}`);
 export const getCameraHealth = (cameraId) => api.get(`/cameras/${cameraId}/health`);
 
 // Access logs
-export const getAccessLogs = (params = {}) => {
+export const getAccessLogs = async (params = {}) => {
   const queryParams = new URLSearchParams(params).toString();
-  return api.get(`/access/logs?${queryParams}`);
+  const response = await api.get(`/access/logs?${queryParams}`);
+  // Ensure logs is always an array and normalize field names
+  if (response.logs && Array.isArray(response.logs)) {
+    return response.logs.map(log => ({
+      ...log,
+      log_id: log.id || log.log_id,
+      access_result: log.access_type || log.access_result,
+      confidence_score: log.confidence || log.confidence_score,
+      // Ensure all required fields exist
+      timestamp: log.timestamp || new Date().toISOString(),
+      camera_id: log.camera_id || 'unknown',
+      person_id: log.person_id || 'unknown',
+      access_type: log.access_type || 'unknown'
+    }));
+  } else if (Array.isArray(response)) {
+    return response;
+  }
+  return [];
 };
 
 // Employees
-export const getEmployees = () => api.get('/employees');
+export const getEmployees = async () => {
+  const response = await api.get('/employees');
+  // Ensure employees is always an array and normalize field names
+  if (response.employees && Array.isArray(response.employees)) {
+    return response.employees.map(employee => ({
+      ...employee,
+      employee_id: employee.id || employee.employee_id,
+      // Ensure all required fields exist
+      name: employee.name || 'Unknown',
+      email: employee.email || '',
+      department: employee.department || '',
+      position: employee.position || '',
+      face_image: employee.face_snapshot || employee.face_image || '',
+      registered_date: employee.registered_date || new Date().toISOString(),
+      status: employee.status || 'active'
+    }));
+  } else if (Array.isArray(response)) {
+    return response;
+  }
+  return [];
+};
 export const getEmployee = (employeeId) => api.get(`/employees/${employeeId}`);
 export const createEmployee = (employeeData) => api.post('/employees', employeeData);
 export const updateEmployee = (employeeId, employeeData) => 

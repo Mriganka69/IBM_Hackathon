@@ -40,7 +40,9 @@ const Employees = () => {
     try {
       setLoading(true);
       const data = await getEmployees();
-      setEmployees(data);
+      // Ensure employees is always an array
+      const employeeList = Array.isArray(data) ? data : [];
+      setEmployees(employeeList);
       setError(null);
     } catch (err) {
       console.error('Error fetching employees:', err);

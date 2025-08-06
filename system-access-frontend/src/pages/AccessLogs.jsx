@@ -23,7 +23,9 @@ const AccessLogs = () => {
     try {
       setLoading(true);
       const data = await getAccessLogs(filters);
-      setLogs(data);
+      // Ensure logs is always an array
+      const logList = Array.isArray(data) ? data : [];
+      setLogs(logList);
       setError(null);
     } catch (err) {
       console.error('Error fetching access logs:', err);
@@ -91,14 +93,14 @@ const AccessLogs = () => {
     const headers = ['Timestamp', 'Camera', 'Person ID', 'Access Type', 'Status', 'Confidence'];
     const csvContent = [
       headers.join(','),
-      ...logs.map(log => [
+      ...(Array.isArray(logs) ? logs.map(log => [
         new Date(log.timestamp).toLocaleString(),
         log.camera_id,
         log.person_id,
         log.access_type,
         log.access_result,
         log.confidence_score ? `${(log.confidence_score * 100).toFixed(1)}%` : 'N/A'
-      ].join(','))
+      ].join(',')) : [])
     ].join('\n');
 
     // Download CSV file
@@ -181,7 +183,7 @@ const AccessLogs = () => {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Logs</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">{logs.length}</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">{Array.isArray(logs) ? logs.length : 0}</p>
             </div>
           </div>
         </div>
@@ -194,11 +196,11 @@ const AccessLogs = () => {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Today</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                {logs.filter(log => {
+                {Array.isArray(logs) ? logs.filter(log => {
                   const today = new Date().toDateString();
                   const logDate = new Date(log.timestamp).toDateString();
                   return today === logDate;
-                }).length}
+                }).length : 0}
               </p>
             </div>
           </div>
@@ -212,7 +214,7 @@ const AccessLogs = () => {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Granted</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                {logs.filter(log => log.access_result === 'granted').length}
+                {Array.isArray(logs) ? logs.filter(log => log.access_result === 'granted').length : 0}
               </p>
             </div>
           </div>
@@ -226,7 +228,7 @@ const AccessLogs = () => {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Denied</p>
               <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                {logs.filter(log => log.access_result === 'denied' || log.access_result === 'tailgating').length}
+                {Array.isArray(logs) ? logs.filter(log => log.access_result === 'denied' || log.access_result === 'tailgating').length : 0}
               </p>
             </div>
           </div>

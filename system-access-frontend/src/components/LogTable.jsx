@@ -22,10 +22,11 @@ const LogTable = ({ logs = [], loading = false, onFilterChange }) => {
   });
 
   const itemsPerPage = 10;
-  const totalPages = Math.ceil(logs.length / itemsPerPage);
+  const safeLogs = Array.isArray(logs) ? logs : [];
+  const totalPages = Math.ceil(safeLogs.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentLogs = logs.slice(startIndex, endIndex);
+  const currentLogs = safeLogs.slice(startIndex, endIndex);
 
   const handleFilterChange = (key, value) => {
     const newFilters = { ...filters, [key]: value };
